@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CareerCanvas - Professional CV Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .font-fa { font-family: 'Vazirmatn', sans-serif !important; }
+        .lang-en { display: block; }
+        .lang-fa { display: none; }
+        [dir="rtl"] .lang-en { display: none; }
+        [dir="rtl"] .lang-fa { display: block; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 transition-all duration-300">
 
     <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
@@ -17,108 +24,546 @@
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
                     <img src="logo.png" alt="CareerCanvas Logo" class="h-8 w-auto object-contain">
-                    <span class="font-bold text-xl tracking-tight text-gray-900">CareerCanvas</span>
+                    <span class="font-bold text-xl tracking-tight text-gray-900">
+                        <span class="lang-en">CareerCanvas</span>
+                        <span class="lang-fa">کاریرکانواس</span>
+                    </span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition">Features</a>
-                    <a href="#templates" class="text-gray-600 hover:text-blue-600 transition">Templates</a>
-                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition">Testimonials</a>
+                <div class="hidden md:flex space-x-8 rtl:space-x-reverse">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition">
+                        <span class="lang-en">Features</span>
+                        <span class="lang-fa">ویژگی‌ها</span>
+                    </a>
+                    <a href="#templates" class="text-gray-600 hover:text-blue-600 transition">
+                        <span class="lang-en">Templates</span>
+                        <span class="lang-fa">قالب‌ها</span>
+                    </a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition">
+                        <span class="lang-en">Testimonials</span>
+                        <span class="lang-fa">نظرات کاربران</span>
+                    </a>
                 </div>
-                <a href="builder.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition shadow-md">
-                    Get Started
-                </a>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleLanguage()" class="px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition text-sm font-medium flex items-center gap-2">
+                        <i class="fas fa-globe"></i>
+                        <span class="lang-en">فارسی</span>
+                        <span class="lang-fa">English</span>
+                    </button>
+                    <a href="builder.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition shadow-md">
+                        <span class="lang-en">Get Started</span>
+                        <span class="lang-fa">شروع کنید</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="bg-gradient-to-br from-blue-50 to-indigo-100 py-16 lg:py-32">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
-                Build Your Perfect <span class="text-blue-600">Professional CV</span><br>In Minutes
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10">
-                Create stunning, ATS-friendly resumes that get you hired. Choose from 10+ professional templates, customize with ease, and download in multiple formats.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="builder.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg transform transition hover:scale-105 text-base md:text-lg">
-                    Build My CV Now
-                </a>
-                <a href="#features" class="bg-white hover:bg-gray-50 text-gray-700 font-bold py-3 px-6 md:py-4 md:px-8 rounded-full shadow border border-gray-200 transition text-base md:text-lg">
-                    Learn More
-                </a>
-            </div>
-            <div class="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-gray-500 font-medium text-sm md:text-base">
-                <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 10+ Templates</span>
-                <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 100% Free</span>
-                <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> ATS Optimized</span>
+    <header class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 lg:py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            <!-- Decorative Elements -->
+            <div class="absolute top-10 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-30 blur-xl"></div>
+            <div class="absolute bottom-10 right-10 w-32 h-32 bg-purple-200 rounded-full opacity-30 blur-xl"></div>
+            
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+                    <span class="lang-en">Build Your Perfect<br><span class="text-blue-600">Professional CV</span><br>In Minutes</span>
+                    <span class="lang-fa">رزومه حرفه‌ای خود را<br><span class="text-blue-600">در چند دقیقه</span><br>بسازید</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+                    <span class="lang-en">Create stunning, ATS-friendly resumes that get you hired. Choose from 15+ professional templates, customize with ease, and download in multiple formats.</span>
+                    <span class="lang-fa">رزومه‌های خیره‌کننده و سازگار با ATS بسازید که شما را استخدام کنند. از بین ۱۵+ قالب حرفه‌ای انتخاب کنید، به راحتی سفارشی کنید و در فرمت‌های مختلف دانلود کنید.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="builder.html" class="group bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 md:px-10 rounded-full shadow-lg transform transition hover:scale-105 text-base md:text-lg flex items-center justify-center gap-2">
+                        <span class="lang-en">Build My CV Now</span>
+                        <span class="lang-fa">ساخت رزومه من</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform rtl:rotate-180"></i>
+                    </a>
+                    <a href="#features" class="bg-white hover:bg-gray-50 text-gray-700 font-bold py-4 px-8 md:px-10 rounded-full shadow border border-gray-200 transition text-base md:text-lg flex items-center justify-center gap-2">
+                        <span class="lang-en">Learn More</span>
+                        <span class="lang-fa">بیشتر بدانید</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div class="mt-12 md:mt-16 flex flex-wrap justify-center gap-6 md:gap-10 text-gray-500 font-medium text-sm md:text-base">
+                    <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span class="lang-en">15+ Templates</span>
+                        <span class="lang-fa">۱۵+ قالب</span>
+                    </span>
+                    <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span class="lang-en">100% Free</span>
+                        <span class="lang-fa">۱۰٪ رایگان</span>
+                    </span>
+                    <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span class="lang-en">ATS Optimized</span>
+                        <span class="lang-fa">بهینه برای ATS</span>
+                    </span>
+                    <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span class="lang-en">No Signup</span>
+                        <span class="lang-fa">بدون ثبت‌نام</span>
+                    </span>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 md:py-20 bg-white">
+    <section id="features" class="py-20 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Why Choose CareerCanvas?</h2>
-                <p class="mt-4 text-lg md:text-xl text-gray-600">Everything you need to create a professional CV that stands out</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <span class="lang-en">Why Choose CareerCanvas?</span>
+                    <span class="lang-fa">چرا کاریرکانواس؟</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    <span class="lang-en">Everything you need to create a professional CV that stands out</span>
+                    <span class="lang-fa">همه چیزهایی که نیاز دارید تا یک رزومه حرفه‌ای و متمایز بسازید</span>
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 text-blue-600"><i class="fas fa-file-alt text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">10+ Professional Templates</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Choose from modern, creative, and classic designs that match your industry.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">15+ Professional Templates</span>
+                        <span class="lang-fa">۱۵+ قالب حرفه‌ای</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Choose from modern, creative, and luxury designs that match your industry and personality.</span>
+                        <span class="lang-fa">از بین طراحی‌های مدرن، خلاقانه و لوکس که با صنعت و شخصیت شما匹配 است انتخاب کنید.</span>
+                    </p>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 text-green-600"><i class="fas fa-robot text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">ATS Optimized</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Our templates are designed to pass Applicant Tracking Systems effortlessly.</p>
+
+                <!-- Feature 2 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">ATS Optimized</span>
+                        <span class="lang-fa">بهینه برای ATS</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Our templates are designed to pass Applicant Tracking Systems effortlessly and increase your chances.</span>
+                        <span class="lang-fa">قالب‌های ما طوری طراحی شده‌اند که به راحتی از سیستم‌های ATS عبور کنند و شانس شما را افزایش دهند.</span>
+                    </p>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 text-purple-600"><i class="fas fa-language text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">Bilingual Support</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Build your CV in English or Persian with perfect RTL support.</p>
+
+                <!-- Feature 3 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-language text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">Bilingual Support</span>
+                        <span class="lang-fa">پشتیبانی دو زبانه</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Build your CV in English or Persian with perfect RTL support and professional typography.</span>
+                        <span class="lang-fa">رزومه خود را به انگلیسی یا فارسی با پشتیبانی کامل RTL و تایپوگرافی حرفه‌ای بسازید.</span>
+                    </p>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 text-yellow-600"><i class="fas fa-download text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">Multiple Export Formats</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Download as PDF or Word document for any application requirement.</p>
+
+                <!-- Feature 4 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 text-yellow-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-download text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">Multiple Export Formats</span>
+                        <span class="lang-fa">فرمت‌های خروجی متعدد</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Download as PDF or Word document for any application requirement with perfect formatting.</span>
+                        <span class="lang-fa">به صورت PDF یا Word برای هر نیاز درخواستی با فرمت‌بندی کامل دانلود کنید.</span>
+                    </p>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4 text-red-600"><i class="fas fa-magic text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">Easy Customization</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Change colors, fonts, and layouts with just a few clicks.</p>
+
+                <!-- Feature 5 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6 text-red-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-magic text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">Easy Customization</span>
+                        <span class="lang-fa">سفارشی‌سازی آسان</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Change colors, fonts, and layouts with just a few clicks. No design skills needed.</span>
+                        <span class="lang-fa">رنگ‌ها، فونت‌ها و چیدمان‌ها را با چند کلیک تغییر دهید. نیازی به مهارت طراحی نیست.</span>
+                    </p>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4 text-indigo-600"><i class="fas fa-shield-alt text-xl"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold mb-2">100% Private & Free</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Your data stays on your device. No signup required ever.</p>
+
+                <!-- Feature 6 -->
+                <div class="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">
+                        <span class="lang-en">100% Private & Free</span>
+                        <span class="lang-fa">۱۰۰٪ خصوصی و رایگان</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        <span class="lang-en">Your data stays on your device. No signup required ever. Completely free forever.</span>
+                        <span class="lang-fa">اطلاعات شما روی دستگاه شما می‌ماند. بدون نیاز به ثبت‌نام. کاملاً رایگان برای همیشه.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Preview -->
+    <section id="templates" class="py-20 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <span class="lang-en">Premium Templates</span>
+                    <span class="lang-fa">قالب‌های پریمیوم</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    <span class="lang-en">Choose from 15+ beautifully designed templates for every profession</span>
+                    <span class="lang-fa">از بین ۱۵+ قالب زیبا طراحی شده برای هر حرفه انتخاب کنید</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Template 1 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400 group-hover:from-blue-50 group-hover:to-blue-100 transition">
+                        <i class="fas fa-file-invoice text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Modern Sidebar</span>
+                            <span class="lang-fa">سایدبار مدرن</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Clean and professional</span>
+                            <span class="lang-fa">تمیز و حرفه‌ای</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Template 2 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-gray-500 group-hover:from-gray-700 group-hover:to-gray-800 transition">
+                        <i class="fas fa-briefcase text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Executive Dark</span>
+                            <span class="lang-fa">اجرایی تیره</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Bold and sophisticated</span>
+                            <span class="lang-fa">جسورانه و پیچیده</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Template 3 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white group-hover:from-blue-600 group-hover:to-blue-800 transition">
+                        <i class="fas fa-paint-brush text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Creative Bold</span>
+                            <span class="lang-fa">خلاقانه جسورانه</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Stand out from crowd</span>
+                            <span class="lang-fa">متمایز از دیگران</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Template 4 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-gray-100 to-white flex items-center justify-center text-gray-400 group-hover:from-gray-50 group-hover:to-white transition">
+                        <i class="fas fa-code text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Minimalist Tech</span>
+                            <span class="lang-fa">مینیمال تکنولوژی</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Perfect for developers</span>
+                            <span class="lang-fa">ایده‌آل برای توسعه‌دهندگان</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Template 5 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center text-amber-600 group-hover:from-amber-200 group-hover:to-amber-300 transition">
+                        <i class="fas fa-crown text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Elegant Gold</span>
+                            <span class="lang-fa">طلایی elegan</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Premium and elegant</span>
+                            <span class="lang-fa">پریمیوم و elegan</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Template 6 -->
+                <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center text-white group-hover:from-purple-600 group-hover:via-pink-600 group-hover:to-red-600 transition">
+                        <i class="fas fa-palette text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">
+                            <span class="lang-en">Modern Gradient</span>
+                            <span class="lang-fa">گرادینت مدرن</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            <span class="lang-en">Creative and colorful</span>
+                            <span class="lang-fa">خلاقانه و رنگارنگ</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="builder.html" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition text-lg group">
+                    <span class="lang-en">View All 15 Templates</span>
+                    <span class="lang-fa">مشاهده همه ۱۵ قالب</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform rtl:rotate-180"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <span class="lang-en">Loved by Job Seekers</span>
+                    <span class="lang-fa">مورد علاقه جویندگان کار</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    <span class="lang-en">See what our users say about CareerCanvas</span>
+                    <span class="lang-fa">ببینید کاربران ما درباره کاریرکانواس چه می‌گویند</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl relative shadow-md hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-quote-left text-5xl text-blue-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-gray-700 italic mb-8 relative z-10 leading-relaxed text-lg">
+                        <span class="lang-en">"CareerCanvas helped me land my dream job! The templates are professional and easy to customize."</span>
+                        <span class="lang-fa">«کاریرکانواس به من کمک کرد شغل رویایی‌ام را پیدا کنم! قالب‌ها حرفه‌ای و سفارشی‌سازی آنها آسان است.»</span>
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">JD</div>
+                        <div>
+                            <div class="font-bold text-gray-900">
+                                <span class="lang-en">John D.</span>
+                                <span class="lang-fa">جان د.</span>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <span class="lang-en">Software Engineer</span>
+                                <span class="lang-fa">مهندس نرم‌افزار</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl relative shadow-md hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-quote-left text-5xl text-green-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-gray-700 italic mb-8 relative z-10 leading-relaxed text-lg">
+                        <span class="lang-en">"The bilingual support is amazing! I could create my CV in both English and Persian effortlessly."</span>
+                        <span class="lang-fa">«پشتیبانی دو زبانه شگفت‌انگیز است! توانستم رزومه‌ام را هم به انگلیسی و هم به فارسی به راحتی بسازم.»</span>
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">AR</div>
+                        <div>
+                            <div class="font-bold text-gray-900">
+                                <span class="lang-en">Ali R.</span>
+                                <span class="lang-fa">علی ر.</span>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <span class="lang-en">Marketing Manager</span>
+                                <span class="lang-fa">مدیر بازاریابی</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl relative shadow-md hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-quote-left text-5xl text-purple-200 absolute top-6 left-6 opacity-50"></i>
+                    <p class="text-gray-700 italic mb-8 relative z-10 leading-relaxed text-lg">
+                        <span class="lang-en">"Best free CV builder I've used. The ATS optimization really works - got more interviews!"</span>
+                        <span class="lang-fa">«بهترین سازنده رزومه رایگانی که استفاده کرده‌ام. بهینه‌سازی ATS واقعاً کار می‌کند - مصاحبه‌های بیشتری گرفتم!»</span>
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">SM</div>
+                        <div>
+                            <div class="font-bold text-gray-900">
+                                <span class="lang-en">Sarah M.</span>
+                                <span class="lang-fa">سارا م.</span>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <span class="lang-en">Graphic Designer</span>
+                                <span class="lang-fa">طراح گرافیک</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 md:py-20 bg-blue-600 text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">Ready to Build Your Professional CV?</h2>
-            <p class="text-lg md:text-xl opacity-90 mb-8 md:mb-10">Join thousands of job seekers who have landed their dream jobs with CareerCanvas</p>
-            <a href="builder.html" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 md:py-4 md:px-10 rounded-full shadow-xl text-base md:text-lg hover:bg-gray-100 transition transform hover:scale-105">
-                Start Building Now - It's Free!
+    <section class="py-20 md:py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <span class="lang-en">Ready to Build Your Professional CV?</span>
+                <span class="lang-fa">آماده ساخت رزومه حرفه‌ای خود هستید؟</span>
+            </h2>
+            <p class="text-lg md:text-xl opacity-90 mb-10 max-w-2xl mx-auto leading-relaxed">
+                <span class="lang-en">Join thousands of job seekers who have landed their dream jobs with CareerCanvas</span>
+                <span class="lang-fa">به هزاران جوینده کار بپیوندید که با کاریرکانواس شغل رویایی خود را پیدا کرده‌اند</span>
+            </p>
+            <a href="builder.html" class="inline-block bg-white text-blue-600 font-bold py-4 px-10 md:px-12 rounded-full shadow-2xl text-base md:text-lg hover:bg-gray-100 transition transform hover:scale-105 flex items-center gap-3 mx-auto">
+                <span class="lang-en">Start Building Now - It's Free!</span>
+                <span class="lang-fa">همین حالا شروع کنید - رایگان است!</span>
+                <i class="fas fa-rocket"></i>
             </a>
-            <p class="mt-6 text-sm opacity-75">No signup required • 100% Free • Your data stays private</p>
+            <p class="mt-8 text-sm opacity-75">
+                <span class="lang-en">No signup required • 100% Free • Your data stays private</span>
+                <span class="lang-fa">بدون نیاز به ثبت‌نام • ۱۰۰٪ رایگان • اطلاعات شما خصوصی می‌ماند</span>
+            </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
+    <footer class="bg-gray-900 text-gray-300 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p>&copy; 2024 CareerCanvas. All rights reserved.</p>
-                <p class="mt-2 text-gray-500">Powered by HashimiHideout</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="logo.png" alt="Logo" class="h-8 w-auto brightness-0 invert">
+                        <span class="font-bold text-2xl text-white">
+                            <span class="lang-en">CareerCanvas</span>
+                            <span class="lang-fa">کاریرکانواس</span>
+                        </span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-6">
+                        <span class="lang-en">Build professional CVs that get you hired. Trusted by thousands worldwide.</span>
+                        <span class="lang-fa">رزومه‌های حرفه‌ای بسازید که شما را استخدام کنند. مورد اعتماد هزاران نفر در سراسر جهان.</span>
+                    </p>
+                    <div class="flex space-x-4 rtl:space-x-reverse">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-700 rounded-full flex items-center justify-center transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">
+                        <span class="lang-en">Product</span>
+                        <span class="lang-fa">محصول</span>
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="builder.html" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">CV Builder</span><span class="lang-fa">سازنده رزومه</span></a></li>
+                        <li><a href="#templates" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Templates</span><span class="lang-fa">قالب‌ها</span></a></li>
+                        <li><a href="#features" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Features</span><span class="lang-fa">ویژگی‌ها</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Pricing</span><span class="lang-fa">قیمت‌گذاری</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">
+                        <span class="lang-en">Resources</span>
+                        <span class="lang-fa">منابع</span>
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">CV Tips</span><span class="lang-fa">نکات رزومه</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Career Advice</span><span class="lang-fa">مشاوره شغلی</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Blog</span><span class="lang-fa">وبلاگ</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Help Center</span><span class="lang-fa">مرکز کمک</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">
+                        <span class="lang-en">Legal</span>
+                        <span class="lang-fa">قانونی</span>
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Privacy Policy</span><span class="lang-fa">سیاست حریم خصوصی</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Terms of Service</span><span class="lang-fa">شرایط خدمات</span></a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs rtl:rotate-180"></i><span class="lang-en">Cookie Policy</span><span class="lang-fa">سیاست کوکی</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm">
+                <p class="mb-2">
+                    <span class="lang-en">&copy; 2024 CareerCanvas. All rights reserved.</span>
+                    <span class="lang-fa">© ۲۰۲۴ کاریرکانواس. تمام حقوق محفوظ است.</span>
+                </p>
+                <p class="text-gray-500">
+                    <span class="lang-en">Powered by HashimiHideout</span>
+                    <span class="lang-fa">قدرت گرفته از هاشیمی‌هیدئوت</span>
+                </p>
             </div>
         </div>
     </footer>
 
+    <script>
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('lang');
+            
+            if (currentLang === 'en') {
+                html.setAttribute('lang', 'fa');
+                html.setAttribute('dir', 'rtl');
+                localStorage.setItem('preferredLang', 'fa');
+            } else {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                localStorage.setItem('preferredLang', 'en');
+            }
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            const html = document.documentElement;
+            
+            if (savedLang === 'fa') {
+                html.setAttribute('lang', 'fa');
+                html.setAttribute('dir', 'rtl');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
