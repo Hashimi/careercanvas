@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerCanvas - CV Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Builder Header -->
+    <header class="bg-white shadow-sm z-40 no-print">
+        <div class="max-w-[1600px] mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-500 hover:text-gray-700" title="Back to Home">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+                <div class="flex items-center gap-2">
+                    <img src="logo.png" alt="Logo" class="h-6 w-auto">
+                    <span class="font-bold text-lg hidden sm:block">Editor</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 md:gap-3 overflow-x-auto">
+                <button onclick="setLanguage('en')" id="btn-en" class="px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium bg-blue-100 text-blue-700 whitespace-nowrap">EN</button>
+                <button onclick="setLanguage('fa')" id="btn-fa" class="px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium hover:bg-gray-100 whitespace-nowrap">FA</button>
+                <div class="h-6 w-px bg-gray-300 mx-1 md:mx-2 hidden sm:block"></div>
+                <input type="color" id="colorPicker" value="#2563eb" onchange="changeColor()" class="w-7 h-7 md:w-8 md:h-8 rounded cursor-pointer border-0 p-0">
+                <select id="templateSelector" onchange="changeTemplate()" class="border rounded-md px-2 md:px-3 py-1.5 text-xs md:text-sm bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none whitespace-nowrap">
+                    <option value="layout-1">1. Modern Sidebar</option>
+                    <option value="layout-2">2. Executive Dark</option>
+                    <option value="layout-3">3. Creative Bold</option>
+                    <option value="layout-4">4. Minimalist Tech</option>
+                    <option value="layout-5">5. Academic Classic</option>
+                    <option value="layout-6">6. Professional Blue</option>
+                    <option value="layout-7">7. Elegant Gold</option>
+                    <option value="layout-8">8. Modern Gradient</option>
+                    <option value="layout-9">9. Clean Minimal</option>
+                    <option value="layout-10">10. Corporate Plus</option>
+                </select>
+                <div class="h-6 w-px bg-gray-300 mx-1 md:mx-2 hidden sm:block"></div>
+                <button onclick="saveCV()" class="text-gray-600 hover:text-blue-600 p-2" title="Save Progress"><i class="fas fa-save"></i></button>
+                <label class="text-gray-600 hover:text-blue-600 p-2 cursor-pointer" title="Load Saved CV">
+                    <i class="fas fa-folder-open"></i>
+                    <input type="file" onchange="loadCV(event)" class="hidden" accept=".json">
+                </label>
+                <button onclick="downloadWord()" class="bg-green-600 hover:bg-green-700 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-md text-xs md:text-sm font-medium transition whitespace-nowrap">Word</button>
+                <button onclick="window.print()" class="bg-gray-800 hover:bg-gray-900 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-md text-xs md:text-sm font-medium transition whitespace-nowrap">PDF</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden flex-col md:flex-row">
+        <!-- Editor Panel -->
+        <aside id="editor-panel" class="w-full md:w-[400px] bg-white border-r border-gray-200 overflow-y-auto no-print shadow-lg z-30 flex-shrink-0">
+            <div class="p-4 md:p-6 space-y-6 md:space-y-8">
+                
+                <!-- Personal Info -->
+                <div class="editor-section">
+                    <h3 data-i18n="personalInfo" class="font-bold text-gray-700 mb-4 flex items-center gap-2"><i class="fas fa-user"></i> Personal Info</h3>
+                    <div class="space-y-4">
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition cursor-pointer relative">
+                            <input type="file" id="inp-photo" onchange="handlePhoto(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*">
+                            <div id="thumb-placeholder" class="text-gray-500">
+                                <i class="fas fa-camera text-2xl mb-2"></i>
+                                <p class="text-xs">Click to upload photo</p>
+                            </div>
+                            <img id="thumb-img" class="hidden mx-auto h-20 w-20 rounded-full object-cover border-2 border-white shadow-md">
+                        </div>
+                        <input type="text" id="inp-name" oninput="updateData()" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Full Name">
+                        <input type="text" id="inp-title" oninput="updateData()" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Job Title">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="email" id="inp-email" oninput="updateData()" class="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Email">
+                            <input type="tel" id="inp-phone" oninput="updateData()" class="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Phone">
+                        </div>
+                        <input type="text" id="inp-location" oninput="updateData()" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Location">
+                        <textarea id="inp-summary" oninput="updateData()" rows="4" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition resize-none" placeholder="Professional Summary..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="skills" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-star"></i> Skills</h3>
+                        <button onclick="addSkill()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-skills-list" class="space-y-3"></div>
+                </div>
+
+                <!-- Experience -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="experience" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-briefcase"></i> Experience</h3>
+                        <button onclick="addExperience()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-experience-list" class="space-y-4"></div>
+                </div>
+
+                <!-- Education -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="education" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <button onclick="addEducation()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-education-list" class="space-y-4"></div>
+                </div>
+
+                <!-- Languages -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="languages" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-language"></i> Languages</h3>
+                        <button onclick="addLanguage()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-language-list" class="space-y-3"></div>
+                </div>
+
+                <!-- Projects -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="projects" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-project-diagram"></i> Projects</h3>
+                        <button onclick="addProject()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-projects-list" class="space-y-4"></div>
+                </div>
+
+                <!-- Other Activities -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="activities" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-users"></i> Other Activities</h3>
+                        <button onclick="addActivity()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-activities-list" class="space-y-4"></div>
+                </div>
+
+                <!-- References -->
+                <div class="editor-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 data-i18n="references" class="font-bold text-gray-700 flex items-center gap-2"><i class="fas fa-user-tag"></i> References</h3>
+                        <button onclick="addReference()" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition">+ Add</button>
+                    </div>
+                    <div id="editor-references-list" class="space-y-4"></div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Preview Area -->
+        <main class="flex-1 bg-gray-200 overflow-y-auto p-2 md:p-4 lg:p-8 flex justify-center">
+            <div id="cv-preview" class="layout-1"></div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
