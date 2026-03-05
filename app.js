@@ -52,16 +52,16 @@ const translations = {
             name: "علی رضایی",
             title: "مهندس نرم‌افزار",
             email: "ali.rezaei@example.com",
-            phone: "۰۹۱۲ ۳۴۵ ۶۷۸۹",
+            phone: "۰۹۲ ۳۴۵ ۶۷۹",
             location: "تهران، ایران",
             summary: "مهندس نرم‌افزار با تجربه با تمرکز قوی بر توسعه فرانت‌اند.",
             skills: [{ name: 'جاوااسکریپت', level: 90 }, { name: 'ری‌اکت', level: 85 }, { name: 'نود جی‌اس', level: 75 }],
-            experiences: [{ role: "توسعه‌دهنده ارشد", company: "شرکت فناوری نوین", date: "۱۳۹۹ - اکنون", desc: "رهبری تیم ۵ نفره توسعه‌دهندگان." }],
-            educations: [{ degree: "کارشناسی مهندسی کامپیوتر", school: "دانشگاه صنعتی شریف", date: "۱۳۳ - ۱۹۷" }],
+            experiences: [{ role: "توسعه‌دهنده ارشد", company: "شرکت فناوری نوین", date: "۱۳۹ - اکنون", desc: "رهبری تیم ۵ نفره توسعه‌دهندگان." }],
+            educations: [{ degree: "کارشناسی مهندسی کامپیوتر", school: "دانشگاه صنعتی شریف", date: "۱۳۹۳ - ۱۳۹۷" }],
             languages: [{ lang: "فارسی", level: "زبان مادری" }, { lang: "انگلیسی", level: "پیشرفته" }],
             projects: [{ title: "پلتفرم فروشگاهی", link: "github.com/alirezaei/ecommerce", desc: "یک راه‌حل فروشگاهی فول‌استک ساخته شده با ری‌اکت و نود جی‌اس." }],
             activities: [{ title: "مشارکت‌کننده متن‌باز", role: "داوطلب", desc: "مشارکت در پروژه‌های متن‌باز مختلف در گیت‌هاب." }],
-            references: [{ name: "مریم احمدی", title: "مدیر فنی در شرکت فناوری نوین", contact: "maryam.ahmadi@novin-tech.ir | ۰۹۱۲ ۱۱۱ ۲۲۲۲" }],
+            references: [{ name: "مریم احمدی", title: "مدیر فنی در شرکت فناوری نوین", contact: "maryam.ahmadi@novin-tech.ir | ۰۹۲ ۱۱۱ ۲۲۲۲" }],
             photo: null
         }
     }
@@ -334,6 +334,15 @@ function renderPreview() {
     const imgSquareHTML = cvData.photo ? `<img src="${cvData.photo}" class="profile-img profile-img-square">` : '';
     const imgSmallHTML = cvData.photo ? `<img src="${cvData.photo}" class="profile-img profile-img-small">` : '';
 
+    // Contact Info HTML - Now included in ALL templates
+    const contactHTML = `
+        <div class="contact-info text-sm text-gray-600">
+            ${cvData.email ? `<div class="contact-item"><i class="fas fa-envelope"></i> ${cvData.email}</div>` : ''}
+            ${cvData.phone ? `<div class="contact-item"><i class="fas fa-phone"></i> ${cvData.phone}</div>` : ''}
+            ${cvData.location ? `<div class="contact-item"><i class="fas fa-map-marker-alt"></i> ${cvData.location}</div>` : ''}
+        </div>
+    `;
+
     const skillsHTML = cvData.skills ? cvData.skills.map(skill => `
         <div class="mb-3">
             <div class="flex justify-between text-sm mb-1"><span>${skill.name}</span><span>${skill.level}%</span></div>
@@ -386,11 +395,12 @@ function renderPreview() {
         </div>
     `).join('') : '';
 
+    // Template 1: Modern Sidebar
     if (currentLayout === 'layout-1') {
         container.innerHTML = `
             <div class="cv-sidebar space-y-6">
                 <div class="mb-4">${imgHTML}</div>
-                <div><h3 class="section-title">${t.contact}</h3><div class="text-sm text-start">${cvData.email}<br>${cvData.phone}<br>${cvData.location}</div></div>
+                <div><h3 class="section-title">${t.contact}</h3>${contactHTML}</div>
                 ${skillsHTML ? `<div><h3 class="section-title">${t.skills}</h3>${skillsHTML}</div>` : ''}
                 <div><h3 class="section-title">${t.languages}</h3><ul class="text-sm space-y-1">${langHTML}</ul></div>
                 <div><h3 class="section-title">${t.education}</h3>${eduHTML}</div>
@@ -404,12 +414,13 @@ function renderPreview() {
                 ${referencesHTML ? `<div class="mb-6"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
             </div>`;
     }
+    // Template 2: Executive Dark
     else if (currentLayout === 'layout-2') {
         container.innerHTML = `
             <div class="cv-sidebar">
                 <div class="mb-6">${imgHTML}</div>
                 <div class="mb-8"><h1 class="text-2xl font-bold">${cvData.name}</h1><p class="text-sm opacity-75">${cvData.title}</p></div>
-                <div class="mb-8"><h3 class="section-title">${t.contact}</h3><div class="text-sm">${cvData.email}<br>${cvData.phone}</div></div>
+                <div class="mb-8"><h3 class="section-title">${t.contact}</h3>${contactHTML}</div>
                 <div><h3 class="section-title">${t.education}</h3>${eduHTML}</div>
             </div>
             <div class="cv-main">
@@ -420,9 +431,10 @@ function renderPreview() {
                 ${referencesHTML ? `<div class="mb-8"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
             </div>`;
     }
+    // Template 3: Creative Bold (FIXED - Now shows contact)
     else if (currentLayout === 'layout-3') {
         container.innerHTML = `
-            <div class="cv-header-block">${imgSquareHTML}<div><h1>${cvData.name}</h1><p class="opacity-90">${cvData.title}</p></div><div class="ms-auto text-end text-sm">${cvData.email}<br>${cvData.phone}</div></div>
+            <div class="cv-header-block">${imgSquareHTML}<div><h1>${cvData.name}</h1><p class="opacity-90">${cvData.title}</p></div><div class="ms-auto text-end text-sm">${contactHTML}</div></div>
             <div class="cv-body">
                 <div class="full-width"><h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-start mb-6">${cvData.summary}</p></div>
                 <div><h3 class="section-title">${t.experience}</h3>${expHTML}</div>
@@ -432,9 +444,10 @@ function renderPreview() {
                 ${referencesHTML ? `<div class="full-width"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
             </div>`;
     }
+    // Template 4: Minimalist Tech (FIXED - Now shows contact)
     else if (currentLayout === 'layout-4') {
         container.innerHTML = `
-            <div class="cv-header"><div class="cv-header-left">${imgSmallHTML}<div><h1>${cvData.name}</h1><p>${cvData.title}</p></div></div><div class="text-end text-sm text-gray-500">${cvData.email}<br>${cvData.phone}</div></div>
+            <div class="cv-header"><div class="cv-header-left">${imgSmallHTML}<div><h1>${cvData.name}</h1><p>${cvData.title}</p></div></div><div class="text-end text-sm text-gray-500">${contactHTML}</div></div>
             <div class="mb-8"><h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
             <div class="mb-8"><h3 class="section-title">${t.experience}</h3>${expHTML}</div>
             <div class="mb-8"><h3 class="section-title">${t.education}</h3>${eduHTML}</div>
@@ -443,9 +456,10 @@ function renderPreview() {
             ${referencesHTML ? `<div class="mb-8"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
         `;
     }
+    // Template 5: Academic Classic (FIXED - Now shows contact)
     else if (currentLayout === 'layout-5') {
         container.innerHTML = `
-            <div class="cv-header">${imgHTML}<h1 class="mt-4">${cvData.name}</h1><p class="text-gray-600">${cvData.title}</p><div class="text-sm text-gray-500 mt-2">${cvData.email} | ${cvData.phone}</div></div>
+            <div class="cv-header">${imgHTML}<h1 class="mt-4">${cvData.name}</h1><p class="text-gray-600">${cvData.title}</p><div class="text-sm text-gray-500 mt-2">${contactHTML}</div></div>
             <div class="content-grid">
                 <div>
                     <h3 class="section-title">${t.profile}</h3><p class="text-sm text-start">${cvData.summary}</p>
@@ -460,9 +474,10 @@ function renderPreview() {
             ${referencesHTML ? `<div class="mt-6"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
         `;
     }
+    // Template 6: Professional Blue (FIXED - Now shows contact)
     else if (currentLayout === 'layout-6') {
         container.innerHTML = `
-            <div class="cv-header">${imgSmallHTML}<div><h1>${cvData.name}</h1><p>${cvData.title}</p></div></div>
+            <div class="cv-header">${imgSmallHTML}<div><h1>${cvData.name}</h1><p>${cvData.title}</p></div><div class="ms-auto text-sm opacity-90">${contactHTML}</div></div>
             <div class="mb-6"><h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
             <div class="mb-6"><h3 class="section-title">${t.experience}</h3>${expHTML}</div>
             <div class="grid grid-cols-2 gap-6">
@@ -474,9 +489,10 @@ function renderPreview() {
             ${referencesHTML ? `<div class="mt-6"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
         `;
     }
+    // Template 7: Elegant Gold (FIXED - Now shows contact)
     else if (currentLayout === 'layout-7') {
         container.innerHTML = `
-            <div class="cv-header">${imgHTML}<h1 class="mt-4">${cvData.name}</h1><p>${cvData.title}</p><div class="text-sm text-gray-500 mt-2">${cvData.email} | ${cvData.phone} | ${cvData.location}</div></div>
+            <div class="cv-header">${imgHTML}<h1 class="mt-4">${cvData.name}</h1><p>${cvData.title}</p><div class="text-sm text-gray-500 mt-2">${contactHTML}</div></div>
             <div class="content-wrapper">
                 <h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-start mb-6">${cvData.summary}</p>
                 <h3 class="section-title">${t.experience}</h3>${expHTML}
@@ -486,12 +502,12 @@ function renderPreview() {
                 ${referencesHTML ? `<h3 class="section-title">${t.references}</h3>${referencesHTML}` : ''}
             </div>`;
     }
+    // Template 8: Modern Gradient (FIXED - Now shows contact)
     else if (currentLayout === 'layout-8') {
         container.innerHTML = `
-            <div class="cv-header"><div><h1>${cvData.name}</h1><p class="opacity-90">${cvData.title}</p></div><div class="text-end text-sm opacity-90">${cvData.email}<br>${cvData.phone}</div></div>
+            <div class="cv-header"><div><h1>${cvData.name}</h1><p class="opacity-90">${cvData.title}</p></div><div class="ms-auto text-end text-sm opacity-90">${contactHTML}</div></div>
             <div class="cv-body">
                 <div class="cv-sidebar">
-                    <h3 class="section-title">${t.contact}</h3><div class="text-sm text-gray-600">${cvData.location}</div>
                     <h3 class="section-title">${t.skills}</h3>${skillsHTML}
                     <h3 class="section-title">${t.languages}</h3><ul class="text-sm text-gray-600 space-y-1">${langHTML}</ul>
                 </div>
@@ -505,9 +521,10 @@ function renderPreview() {
                 </div>
             </div>`;
     }
+    // Template 9: Clean Minimal
     else if (currentLayout === 'layout-9') {
         container.innerHTML = `
-            <div class="cv-header"><div><h1>${cvData.name}</h1><p>${cvData.title}</p></div><div class="text-end text-sm text-gray-500">${cvData.email}<br>${cvData.phone}<br>${cvData.location}</div></div>
+            <div class="cv-header"><div><h1>${cvData.name}</h1><p>${cvData.title}</p></div><div class="text-end text-sm text-gray-500">${contactHTML}</div></div>
             <div class="two-column">
                 <div>
                     <h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-sm text-start">${cvData.summary}</p>
@@ -522,6 +539,7 @@ function renderPreview() {
                 </div>
             </div>`;
     }
+    // Template 10: Corporate Plus
     else if (currentLayout === 'layout-10') {
         container.innerHTML = `
             <div class="cv-sidebar">
@@ -543,6 +561,81 @@ function renderPreview() {
                 ${projectsHTML ? `<div class="mb-6"><h3 class="section-title">${t.projects}</h3>${projectsHTML}</div>` : ''}
                 ${activitiesHTML ? `<div class="mb-6"><h3 class="section-title">${t.activities}</h3>${activitiesHTML}</div>` : ''}
                 ${referencesHTML ? `<div class="mb-6"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
+            </div>`;
+    }
+    // Template 11: Premium Black (FIXED - Now shows contact)
+    else if (currentLayout === 'layout-11') {
+        container.innerHTML = `
+            <div class="cv-header" style="background:#1a1a1a;color:white;padding:50px;margin:-60px -50px 40px -50px;display:flex;align-items:center;gap:30px;">${imgSmallHTML}<div><h1 style="font-size:3rem;font-weight:700;margin:0;">${cvData.name}</h1><p style="color:#d4af37;font-size:1.2rem;">${cvData.title}</p></div><div class="ms-auto text-sm" style="color:#d4af37;">${contactHTML}</div></div>
+            <div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.profile}</h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
+            <div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.experience}</h3>${expHTML}</div>
+            <div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.education}</h3>${eduHTML}</div>
+            ${projectsHTML ? `<div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.projects}</h3>${projectsHTML}</div>` : ''}
+            ${activitiesHTML ? `<div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.activities}</h3>${activitiesHTML}</div>` : ''}
+            ${referencesHTML ? `<div class="mb-6"><h3 class="section-title" style="border-bottom:3px solid #d4af37;">${t.references}</h3>${referencesHTML}</div>` : ''}
+        `;
+    }
+    // Template 12: Navy Elite
+    else if (currentLayout === 'layout-12') {
+        container.innerHTML = `
+            <div class="cv-sidebar" style="background:#1e3a5f;color:white;">
+                <div class="sidebar-item">${imgHTML}</div>
+                <div class="sidebar-item">
+                    <h3 class="section-title" style="color:#93c5fd;border-color:rgba(255,255,255,0.3);">${t.contact}</h3>
+                    <div class="contact-item" style="color:rgba(255,255,255,0.9);margin-bottom:15px;display:flex;align-items:center;gap:12px;"><i class="fas fa-envelope"></i> ${cvData.email}</div>
+                    <div class="contact-item" style="color:rgba(255,255,255,0.9);margin-bottom:15px;display:flex;align-items:center;gap:12px;"><i class="fas fa-phone"></i> ${cvData.phone}</div>
+                    <div class="contact-item" style="color:rgba(255,255,255,0.9);margin-bottom:15px;display:flex;align-items:center;gap:12px;"><i class="fas fa-map-marker-alt"></i> ${cvData.location}</div>
+                </div>
+                <div class="sidebar-item"><h3 class="section-title" style="color:#93c5fd;border-color:rgba(255,255,255,0.3);">${t.skills}</h3>${skillsHTML}</div>
+            </div>
+            <div class="cv-main">
+                <div class="mb-6"><h1 class="text-3xl font-bold" style="color:#1e3a5f">${cvData.name}</h1><p class="text-lg text-gray-600">${cvData.title}</p></div>
+                <div class="mb-6"><h3 class="section-title">${t.profile}</h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
+                <div class="mb-6"><h3 class="section-title">${t.experience}</h3>${expHTML}</div>
+                <div class="mb-6"><h3 class="section-title">${t.education}</h3>${eduHTML}</div>
+                ${projectsHTML ? `<div class="mb-6"><h3 class="section-title">${t.projects}</h3>${projectsHTML}</div>` : ''}
+                ${activitiesHTML ? `<div class="mb-6"><h3 class="section-title">${t.activities}</h3>${activitiesHTML}</div>` : ''}
+                ${referencesHTML ? `<div class="mb-6"><h3 class="section-title">${t.references}</h3>${referencesHTML}</div>` : ''}
+            </div>`;
+    }
+    // Template 13: Charcoal Modern
+    else if (currentLayout === 'layout-13') {
+        container.innerHTML = `
+            <div class="cv-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:50px;padding-bottom:30px;border-bottom:2px solid #374151;"><div><h1 style="font-size:3rem;font-weight:700;color:#1f2937;margin:0;">${cvData.name}</h1><p style="color:#6b7280;font-size:1.2rem;">${cvData.title}</p></div><div class="text-end text-sm text-gray-500">${contactHTML}</div></div>
+            <div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.profile}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
+            <div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.experience}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3>${expHTML}</div>
+            <div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.education}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3>${eduHTML}</div>
+            ${projectsHTML ? `<div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.projects}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3>${projectsHTML}</div>` : ''}
+            ${activitiesHTML ? `<div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.activities}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3>${activitiesHTML}</div>` : ''}
+            ${referencesHTML ? `<div class="mb-6"><h3 class="section-title" style="display:flex;align-items:center;gap:15px;">${t.references}<span style="display:block;width:40px;height:3px;background:#374151;"></span></h3>${referencesHTML}</div>` : ''}
+        `;
+    }
+    // Template 14: Emerald Professional (FIXED - Now shows contact)
+    else if (currentLayout === 'layout-14') {
+        container.innerHTML = `
+            <div class="cv-header" style="background:linear-gradient(135deg,#059669,#047857);color:white;padding:50px;margin:-60px -50px 40px -50px;">${imgSmallHTML}<div><h1 style="font-size:2.8rem;font-weight:700;margin:0;">${cvData.name}</h1><p style="opacity:0.95;margin:8px 0 0 0;">${cvData.title}</p></div><div class="ms-auto text-sm opacity-90">${contactHTML}</div></div>
+            <div class="mb-6"><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.profile}</h3><p class="text-gray-600 text-start">${cvData.summary}</p></div>
+            <div class="mb-6"><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.experience}</h3>${expHTML}</div>
+            <div class="grid grid-cols-2 gap-6">
+                <div><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.education}</h3>${eduHTML}</div>
+                <div><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.skills}</h3>${skillsHTML}</div>
+            </div>
+            ${projectsHTML ? `<div class="mt-6"><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.projects}</h3>${projectsHTML}</div>` : ''}
+            ${activitiesHTML ? `<div class="mt-6"><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.activities}</h3>${activitiesHTML}</div>` : ''}
+            ${referencesHTML ? `<div class="mt-6"><h3 class="section-title" style="color:#059669;border-left:4px solid #059669;padding-left:15px;">${t.references}</h3>${referencesHTML}</div>` : ''}
+        `;
+    }
+    // Template 15: Platinum Elite
+    else if (currentLayout === 'layout-15') {
+        container.innerHTML = `
+            <div class="cv-header" style="text-align:center;margin-bottom:50px;padding-bottom:40px;border-bottom:2px solid #e5e7eb;"><h1 style="font-size:3.5rem;font-weight:300;color:#111827;margin:0;letter-spacing:-1px;">${cvData.name}</h1><p style="color:#6b7280;font-size:1.2rem;margin-top:10px;">${cvData.title}</p><div class="text-sm text-gray-500 mt-2">${contactHTML}</div></div>
+            <div class="content-wrapper" style="max-width:900px;margin:0 auto;">
+                <h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.profile}</h3><p class="text-gray-600 text-start mb-6">${cvData.summary}</p>
+                <h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.experience}</h3>${expHTML}
+                <h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.education}</h3>${eduHTML}
+                ${projectsHTML ? `<h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.projects}</h3>${projectsHTML}` : ''}
+                ${activitiesHTML ? `<h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.activities}</h3>${activitiesHTML}` : ''}
+                ${referencesHTML ? `<h3 class="section-title" style="text-align:center;color:#6b7280;letter-spacing:3px;">${t.references}</h3>${referencesHTML}` : ''}
             </div>`;
     }
 }
